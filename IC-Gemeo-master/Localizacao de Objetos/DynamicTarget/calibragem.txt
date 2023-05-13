@@ -1,0 +1,6 @@
+Peca: 
+lower: [  0   0 213] 
+upper: [179 255 255]
+Encaixe: 
+lower: [ 0  0 39] 
+upper: [179 255 156]
