@@ -74,8 +74,8 @@ def pegaCalibragem(alvo):
 
 def getPosition(metodoContorno,alvo):
 
-    #path = 'C:/Code/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230329_19_02_50_Pro.jpg'
-    path = 'C:/Code/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230306_14_38_54_Pro.jpg'
+    #path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230329_19_02_50_Pro.jpg'
+    path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230306_14_38_54_Pro.jpg'
     tamanhoMin, tamanhoMax,lower,upper = pegaCalibragem(alvo)
     image = cv2.imread(path)
     image = cv2.resize(image, (int(image.shape[1] *0.5), int(image.shape[0] *0.5)))
@@ -166,7 +166,7 @@ def interface(metodoContorno,alvo):
 
 def achaEncaixe(vertices):
     
-    path = 'C:/Code/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230329_19_02_50_Pro.jpg'
+    path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230329_19_02_50_Pro.jpg'
     tamanhoMin, tamanhoMax,lower,upper = pegaCalibragem("p")
     image = cv2.imread(path)
     image = cv2.resize(image, (int(image.shape[1] *0.5), int(image.shape[0] *0.5)))
@@ -182,7 +182,7 @@ def achaEncaixe(vertices):
     blur = cv2.GaussianBlur(img, (5,5), 0)
     im_bw = cv2.Canny(blur, 10, 90)
     
-    img_building = np.array(Image.open("C:/Code/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230329_19_02_50_Pro.jpg"))[:, :, :3]
+    img_building = np.array(Image.open("C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230329_19_02_50_Pro.jpg"))[:, :, :3]
     maskEncaixe = np.zeros(shape=img_building.shape, dtype=np.uint8)
     maskEncaixe[contours[0] // 4:img_building.shape[0] * 3 // 4,
      img_building.shape[1] // 4:img_building.shape[1] * 3 // 4,
@@ -250,7 +250,7 @@ aux = 1
 for position in centers: 
     obj = RL.AddTarget(f'Peça {aux}', world)
     obj.setPose(Offset(eye(), position[0], position[1], 0, 180, 0, 180))    
-    caixa.setPose(Offset(eye(), position[0], position[1], 0, 180, 0, 180))    
+    # caixa.setPose(Offset(eye(), position[0], position[1], 0, 180, 0, 180))    
     #robot.MoveJ(obj)
     aux += 1
 
