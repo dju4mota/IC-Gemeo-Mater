@@ -1,5 +1,3 @@
-from robodk.robolink import *      # RoboDK's API
-from robodk.robomath import *      # Math toolbox for robots
 from tkinter import *
 import numpy as np
 import cv2
@@ -52,8 +50,8 @@ def showImages(images):
 
 def getHSV(metodoContorno, tamanhoMin, tamanhoMax):
 
-    # path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230306_14_38_54_Pro.jpg'
-    path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230306_14_42_32_Pro.jpg'
+    # path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/imagens/novas/WIN_20231018_21_37_10_Pro.jpg'
+    path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/imagens/fotosPreparadas/bancada-42.jpg'
     
     
     

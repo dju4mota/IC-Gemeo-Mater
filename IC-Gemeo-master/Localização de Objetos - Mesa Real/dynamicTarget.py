@@ -1,48 +1,9 @@
-from robodk.robolink import *      # RoboDK's API
-from robodk.robomath import *      # Math toolbox for robots
+import os
 from tkinter import *
 import numpy as np
 import cv2
 import json
 
-
-def empty(a):
-    pass
-
-def calibrar(image):
-
-    cv2.namedWindow("calibracao")
-    cv2.resizeWindow("calibracao",640,240)
-    cv2.createTrackbar("hue min", "calibracao", 0,179,empty)
-    cv2.createTrackbar("hue max", "calibracao", 179,179,empty)
-    cv2.createTrackbar("sat min", "calibracao", 0,255,empty)
-    cv2.createTrackbar("sat max", "calibracao", 255,255,empty)
-    cv2.createTrackbar("val min", "calibracao", 215,255,empty)
-    cv2.createTrackbar("val max", "calibracao", 255,255,empty)
-    
-    while True: 
-        try:
-            h_minValue = cv2.getTrackbarPos("hue min", "calibracao")
-            h_maxValue = cv2.getTrackbarPos("hue max", "calibracao")
-            s_minValue = cv2.getTrackbarPos("sat min", "calibracao")
-            s_maxValue = cv2.getTrackbarPos("sat max", "calibracao")
-            v_minValue = cv2.getTrackbarPos("val min", "calibracao")
-            v_maxValue = cv2.getTrackbarPos("val max", "calibracao")
-        except: 
-            break
-    
-        imgHSV = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) 
-        lower = np.array([h_minValue, s_minValue, v_minValue])
-        upper = np.array([h_maxValue, s_maxValue, v_maxValue])
-        mask = cv2.inRange(imgHSV, lower, upper)
-        imgResult = cv2.bitwise_and(image, image, mask=mask)
-        
-        cv2.imshow('Image', image)
-        cv2.imshow('Mask', mask)
-        cv2.imshow('Image Masked', imgResult)
-        cv2.waitKey(1)
-
-    return imgResult
 
 def showImages(images):
     for image in images:
@@ -72,15 +33,11 @@ def pegaCalibragem(alvo):
 
     return tamanhoMin, tamanhoMax,lower,upper
 
-def getPosition(metodoContorno,alvo):
+def getPosition(metodoContorno,alvo, path):
 
-    #path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230329_19_02_50_Pro.jpg'
-    # path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230306_14_38_54_Pro.jpg'
-    path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230306_14_42_32_Pro.jpg'
     tamanhoMin, tamanhoMax,lower,upper = pegaCalibragem(alvo)
     image = cv2.imread(path)
     image = cv2.resize(image, (int(image.shape[1] *0.5), int(image.shape[0] *0.5)))
-
     #maskedImage = calibrar(image)
     
     imgHSV = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) 
@@ -116,12 +73,15 @@ def getPosition(metodoContorno,alvo):
                 if lastPoint[0] != cx or lastPoint[1] != cy:
                     cv2.drawContours(img, [c], -1, (0,255,0), 3)
                     cv2.circle(img, (cx, cy), 5, (0,0,255), -1)
+                    # cv2.circle(img, (10, 10), 5, (255,0,0), -1)
+                    # cv2.circle(img, (500, 500), 5, (0,255,0), -1)
                     cv2.putText(img, f"{cx, cy}", (cx - 20, cy - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 2)
                     print(f'area {area} - vertices {objCor} - pontos [{cx}, {cy}]')
                     lastPoint[0], lastPoint[1] = cx,cy
                     centers.append((cx, cy))
 
-    showImages([image, im_bw, img])
+    # showImages([image, im_bw, img])
+    showImages([img])
     return centers
 
 def interface(metodoContorno,alvo):
@@ -166,6 +126,13 @@ def interface(metodoContorno,alvo):
     return cx, cy
 
 
+def calculaPosicaoReal(obj,ref): 
+    cmPorPixel = 0.5
+    distX = obj[0] - ref[0]
+    distY = obj[1] - ref[1]
+    print(f"X : {distX}  Y: {distY}")
+    print(f"Está a {distX* cmPorPixel} cm em X e {distY* cmPorPixel} cm em Y")
+
 # Objetivo identificar:  
 #  1. peça
 #  2. burcao
@@ -177,22 +144,30 @@ def interface(metodoContorno,alvo):
 # 3. area -> problema: forma 
 
 
-print("Marcando peça")
-centers = getPosition(cv2.RETR_EXTERNAL, "p")
-aux = 1
-for position in centers: 
-    print(f"{position[0]}, {position[1]}") 
-    aux += 1
+def encontraPosicoesEmFoto(path):
+
+    print("Peça")
+    pecas = getPosition(cv2.RETR_CCOMP , "p", path)
+    for position in pecas: 
+        print(f"{position[0]}, {position[1]}") 
+
+    # print("Encaixe")
+    # encaixes = getPosition(cv2.RETR_EXTERNAL, "e", path)
+    # for position in pecas: 
+    #     print(f"{position[0]}, {position[1]}") 
+
+    # calculando da peca para o encaixe
+    # try: 
+    #     calculaPosicaoReal(pecas[0], encaixes[0])
+    # except:
+    #     print("Nao encontrou") 
 
 
-print("Marcando encaixe")
-cx, cy = interface(cv2.RETR_EXTERNAL, "e")
-print(f"{cx} , {cy}")
+def encontraEmTodasAsFotos(directory_src):
+        
+    for filename in os.listdir(directory_src):
+        path = directory_src + filename
+        encontraPosicoesEmFoto(path)
 
 
-
-def calculaPosicaoReal(obj,ref): 
-    print(f"X : {obj[0] - ref[0]}  Y: {obj[1] - ref[1]}")
-
-
-calculaPosicaoReal(centers[0], [cx,cy])
+encontraEmTodasAsFotos('C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/imagens/fotosPreparadas/')
