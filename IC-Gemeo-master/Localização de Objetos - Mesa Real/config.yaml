@@ -1,10 +1,8 @@
-path: C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/imagens/IC.v2i.yolov8
+path: C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/imagens/ic-basico.v3i.yolov8-obb
 train: ../train/images
 val: ../test/images
 
 
 names:
   0: pecaCinza
-  1: pecaCinzaCaida
-  2: pecaPreta
-  3: pecaPretaCaida
+  1: pecaPreta

@@ -1,0 +1,13 @@
+Quadro: 
+    40 cm altura
+    60 cm largura
+    altura: +- 1cm
+
+Peça:
+    2.5 cm x 2.5 cm
+
+
+Camera: 
+    Suporte: 36cm
+    altura da mesa: 108cm
+
