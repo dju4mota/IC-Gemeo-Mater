@@ -1,0 +1,25 @@
+begin 
+
+//s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+//s.connect((socket.gethostname(), 1234))
+// link? 
+
+sio sSensor1
+sioLink(sSensor1, sio_server)
+
+//s.send((bytes("i-------", "utf-8")))
+//s.send((bytes("r-------", "utf-8")))
+string msg
+msg = "i"
+
+sioSet(sSensor1, msg)
+
+string recebido
+sioGet(sSensor1, recebido)
+
+if recebido == "i"
+    msg = "r"
+    sioSet(sSensor1, msg)
+
+
+end
