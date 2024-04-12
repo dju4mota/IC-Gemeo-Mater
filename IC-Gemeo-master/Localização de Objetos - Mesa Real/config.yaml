@@ -1,4 +1,5 @@
-path: C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/imagens/ic-basico.v3i.yolov8-obb
+#path: C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/imagens/ic-basico.v7i.yolov8-obb
+path: C:/Code/IC-Gemeo-Mater/IC-Gemeo-master/imagens/ic-basico.v7i.yolov8-obb
 train: ../train/images
 val: ../test/images
 
