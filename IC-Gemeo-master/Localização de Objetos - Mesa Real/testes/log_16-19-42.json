@@ -1,0 +1,20 @@
+{
+    "testes": [
+        {
+            "foto": "foto_live_16-19-44.png",
+            "predict": "foto_predict_16-19-46.png",
+            "distancia-calculada": [
+                0.4007779620038707,
+                400.7779620038707
+            ]
+        },
+        {
+            "foto": "foto_live_16-20-13.png",
+            "predict": "foto_predict_16-20-14.png",
+            "distancia-calculada": [
+                0.4018383082978447,
+                401.8383082978447
+            ]
+        }
+    ]
+}

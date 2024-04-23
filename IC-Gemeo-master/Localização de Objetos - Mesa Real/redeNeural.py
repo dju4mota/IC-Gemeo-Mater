@@ -8,15 +8,16 @@ from ultralytics.solutions import distance_calculation
 import cv2
 from datetime import datetime
 
+
 #  results = model.predict("../imagens/ic-basico.v4i.yolov8-obb/test/images/WIN_20240326_16_06_12_Pro_jpg.rf"
 #                        ".dbe0fde910d83e12284a6d86ae6d5342.jpg")
-
 #  results = model.predict("../imagens/camera_nova/WIN_20240318_20_20_30_Pro.jpg")
 
 
-def calcular_distancia(pixel_per_meter,centroid1, centroid2):
+def calcular_distancia(pixel_per_meter, centroid1, centroid2):
     pixel_distance = math.sqrt((centroid1[0] - centroid2[0]) ** 2 + (centroid1[1] - centroid2[1]) ** 2)
     return pixel_distance / pixel_per_meter * 100
+
 
 def gerarLog(filename, distance, foto, predict):
     info = {
@@ -34,7 +35,6 @@ def gerarLog(filename, distance, foto, predict):
         json_file.seek(0)
         # convert back to json.
         json.dump(file_data, json_file, indent=4)
-
 
 
 def salva_imagem_predict(pontoX, pontoY):
@@ -58,7 +58,7 @@ def distancia(img, logFilename, img_name):
     dist_obj = distance_calculation.DistanceCalculation()
 
     for result in results:
-        # result.show()
+        result.show()
         # print(result.boxes)
         # centroids.append(dist_obj.calculate_centroid(result.boxes))
         # dist_obj.start_process()
@@ -69,21 +69,24 @@ def distancia(img, logFilename, img_name):
     # 578 com pre processamento
     # 1153 direto do opencv
 
-    dist_obj.pixel_per_meter = 1153
+    # 29 de altura:
+    # 883  (1 m)
+    # 870 (10 cm)
+    dist_obj.pixel_per_meter = 870
     distance = dist_obj.calculate_distance(centroids[0], centroids[1])
-    print(centroids[0])
-    print(centroids[1])
-    print(calcular_distancia(1153, centroids[0], centroids[1]))
     print(distance)
+    #print(centroids[0])
+    #print(centroids[1])
+    #print(calcular_distancia(1153, centroids[0], centroids[1]))
     predict_name = salva_imagem_predict(centroids[1][0], centroids[1][1])
     try:
-        gerarLog(logFilename, distance, img_name,predict_name)
+        gerarLog(logFilename, distance, img_name, predict_name)
     except:
         print("erro gerar log")
 
 
 # Yolo
-model = YOLO("../../runs/detect/train12/weights/best.pt")
+model = YOLO("../../runs/detect/train16/weights/best.pt")
 # Open CV
 height = 720
 width = 1280
@@ -129,10 +132,6 @@ cam.release()
 cv2.destroyAllWindows()
 
 
-#
-#
-#
-#
 #  pixel vs milimitro
 #  distorção da camera ( meio pras borodas) parallax
 #  * grid de calibração

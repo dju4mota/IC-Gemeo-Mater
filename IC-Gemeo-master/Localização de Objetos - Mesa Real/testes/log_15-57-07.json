@@ -1,0 +1,36 @@
+{
+    "testes": [
+        {
+            "foto": "foto_live_15-57-11.png",
+            "predict": "foto_predict_15-57-17.png",
+            "distancia-calculada": [
+                0.11162783295222378,
+                111.62783295222378
+            ]
+        },
+        {
+            "foto": "foto_live_15-58-16.png",
+            "predict": "foto_predict_15-58-20.png",
+            "distancia-calculada": [
+                0.244176141912045,
+                244.176141912045
+            ]
+        },
+        {
+            "foto": "foto_live_15-59-28.png",
+            "predict": "foto_predict_15-59-33.png",
+            "distancia-calculada": [
+                0.4738392110533625,
+                473.83921105336253
+            ]
+        },
+        {
+            "foto": "foto_live_16-01-10.png",
+            "predict": "foto_predict_16-01-15.png",
+            "distancia-calculada": [
+                0.4021257258302451,
+                402.1257258302451
+            ]
+        }
+    ]
+}

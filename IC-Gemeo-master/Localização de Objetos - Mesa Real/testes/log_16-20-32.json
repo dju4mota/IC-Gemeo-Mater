@@ -1,0 +1,76 @@
+{
+    "testes": [
+        {
+            "foto": "foto_live_16-20-44.png",
+            "predict": "foto_predict_16-20-51.png",
+            "distancia-calculada": [
+                0.40076262700391074,
+                400.7626270039107
+            ]
+        },
+        {
+            "foto": "foto_live_16-21-14.png",
+            "predict": "foto_predict_16-21-19.png",
+            "distancia-calculada": [
+                0.21455824176688518,
+                214.55824176688517
+            ]
+        },
+        {
+            "foto": "foto_live_16-22-18.png",
+            "predict": "foto_predict_16-22-23.png",
+            "distancia-calculada": [
+                0.20961555669757084,
+                209.61555669757084
+            ]
+        },
+        {
+            "foto": "foto_live_16-23-29.png",
+            "predict": "foto_predict_16-23-34.png",
+            "distancia-calculada": [
+                0.22113901255930737,
+                221.13901255930736
+            ]
+        },
+        {
+            "foto": "foto_live_16-25-02.png",
+            "predict": "foto_predict_16-25-07.png",
+            "distancia-calculada": [
+                0.4298978405328701,
+                429.89784053287013
+            ]
+        },
+        {
+            "foto": "foto_live_16-27-12.png",
+            "predict": "foto_predict_16-27-16.png",
+            "distancia-calculada": [
+                0.5962714148819811,
+                596.2714148819811
+            ]
+        },
+        {
+            "foto": "foto_live_16-28-11.png",
+            "predict": "foto_predict_16-28-16.png",
+            "distancia-calculada": [
+                0.09165833304590507,
+                91.65833304590507
+            ]
+        },
+        {
+            "foto": "foto_live_16-30-05.png",
+            "predict": "foto_predict_16-30-09.png",
+            "distancia-calculada": [
+                0.10472394875801187,
+                104.72394875801187
+            ]
+        },
+        {
+            "foto": "foto_live_16-30-43.png",
+            "predict": "foto_predict_16-30-49.png",
+            "distancia-calculada": [
+                0.11173328491396074,
+                111.73328491396074
+            ]
+        }
+    ]
+}
