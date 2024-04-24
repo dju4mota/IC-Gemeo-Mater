@@ -8,4 +8,4 @@ model = YOLO("yolov8n.yaml")
 # model = YOLO('yolov8n-obb.yaml')
 
 
-results = model.train(data="config.yaml", epochs=200)
+results = model.train(data="config.yaml", epochs=300)
