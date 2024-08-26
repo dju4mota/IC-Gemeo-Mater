@@ -3,6 +3,7 @@ import math
 import os.path
 import shutil
 
+import numpy
 from ultralytics import YOLO
 from ultralytics.solutions import distance_calculation
 import cv2
@@ -49,6 +50,32 @@ def salva_imagem_predict(pontoX, pontoY):
     return save_img
 
 
+def distancia_media(img):
+    media_distancia = 0
+    quantidade = 1
+    for i in range(0, quantidade):
+        results = model(img)
+        centroids = []
+        for result in results:
+            #result.show()
+            for pos in result.boxes.numpy().xyxy:
+                centroids.append(pos)
+
+        dist_obj = distance_calculation.DistanceCalculation()
+        dist_obj.pixel_per_meter = 870
+        #centro da imagem
+        centro = numpy.asarray([640, 360, 641, 361])
+        distance = dist_obj.calculate_distance(centroids[0], centro)
+
+        result_img = cv2.circle(img, (int(centroids[0][0]), int(centroids[0][1])), radius=10, color=(0, 255, 0), thickness=-1)
+        result_img = cv2.circle(result_img, (640, 360), radius=10, color=(0, 255, 0), thickness=-1)
+        cv2.imshow("distancia", result_img)
+
+        media_distancia += distance[1]
+    print(f"final: {media_distancia/quantidade}")
+
+
+
 def distancia(img, logFilename, img_name):
     # img = cv2.resize(img, (640, 640))
     results = model(img, save=True)
@@ -72,25 +99,26 @@ def distancia(img, logFilename, img_name):
     # 29 de altura:
     # 883  (1 m)
     # 870 (10 cm)
+    # 8.7
     dist_obj.pixel_per_meter = 870
     distance = dist_obj.calculate_distance(centroids[0], centroids[1])
     print(distance)
-    #print(centroids[0])
-    #print(centroids[1])
+    print(centroids[0])
+    print(centroids[1])
     #print(calcular_distancia(1153, centroids[0], centroids[1]))
-    predict_name = salva_imagem_predict(centroids[1][0], centroids[1][1])
-    try:
-        gerarLog(logFilename, distance, img_name, predict_name)
-    except:
-        print("erro gerar log")
+    # predict_name = salva_imagem_predict(centroids[1][0], centroids[1][1])
+    #try:
+     #   gerarLog(logFilename, distance, img_name, predict_name)
+    #except:
+    #    print("erro gerar log")
 
 
 # Yolo
-model = YOLO("../../runs/detect/train16/weights/best.pt")
+model = YOLO("../../runs/detect/train20/weights/best.pt")
 # Open CV
 height = 720
 width = 1280
-cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+cam = cv2.VideoCapture(1, cv2.CAP_DSHOW)
 cam.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 cam.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 img_counter = 0
@@ -107,6 +135,7 @@ with open(logFilename, "w") as json_file:
 
 while True:
     ret, frame = cam.read()
+    # frame = cv2.imread("C:\\Code\\Projetinhos\\IC-Gemeo-master\\IC-Gemeo-master\\Localização de Objetos - Mesa Real\\testes\\foto_live_16-57-10.png")
     if not ret:
         print("failed to grab frame")
         break
@@ -124,7 +153,8 @@ while True:
         cv2.imwrite(os.path.join(path, img_name), frame)
         img_counter += 1
         try:
-            distancia(frame,logFilename, img_name)
+            #distancia(frame, logFilename, img_name)
+            distancia_media(frame)
         except:
             print("erro para calcular distancia")
 

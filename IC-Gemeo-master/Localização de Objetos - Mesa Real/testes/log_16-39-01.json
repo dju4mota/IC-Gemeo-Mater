@@ -1,0 +1,180 @@
+{
+    "testes": [
+        {
+            "foto": "foto_live_16-39-17.png",
+            "predict": "foto_predict_16-39-19.png",
+            "distancia-calculada": [
+                0.10546950446506863,
+                105.46950446506862
+            ]
+        },
+        {
+            "foto": "foto_live_16-39-39.png",
+            "predict": "foto_predict_16-39-40.png",
+            "distancia-calculada": [
+                0.11563585789248162,
+                115.63585789248162
+            ]
+        },
+        {
+            "foto": "foto_live_16-40-16.png",
+            "predict": "foto_predict_16-40-16.png",
+            "distancia-calculada": [
+                0.12805758992236474,
+                128.05758992236474
+            ]
+        },
+        {
+            "foto": "foto_live_16-40-42.png",
+            "predict": "foto_predict_16-40-42.png",
+            "distancia-calculada": [
+                0.1369463163213057,
+                136.9463163213057
+            ]
+        },
+        {
+            "foto": "foto_live_16-41-06.png",
+            "predict": "foto_predict_16-41-06.png",
+            "distancia-calculada": [
+                0.14873456821221703,
+                148.73456821221703
+            ]
+        },
+        {
+            "foto": "foto_live_16-41-32.png",
+            "predict": "foto_predict_16-41-32.png",
+            "distancia-calculada": [
+                0.15885717324035478,
+                158.85717324035477
+            ]
+        },
+        {
+            "foto": "foto_live_16-46-21.png",
+            "predict": "foto_predict_16-46-21.png",
+            "distancia-calculada": [
+                0.1690211679390617,
+                169.02116793906168
+            ]
+        },
+        {
+            "foto": "foto_live_16-46-48.png",
+            "predict": "foto_predict_16-46-48.png",
+            "distancia-calculada": [
+                0.17969894153366794,
+                179.69894153366795
+            ]
+        },
+        {
+            "foto": "foto_live_16-47-30.png",
+            "predict": "foto_predict_16-47-31.png",
+            "distancia-calculada": [
+                0.1901259468905243,
+                190.12594689052432
+            ]
+        },
+        {
+            "foto": "foto_live_16-48-04.png",
+            "predict": "foto_predict_16-48-04.png",
+            "distancia-calculada": [
+                0.20086863089052562,
+                200.86863089052562
+            ]
+        },
+        {
+            "foto": "foto_live_16-48-37.png",
+            "predict": "foto_predict_16-48-37.png",
+            "distancia-calculada": [
+                0.2122946703572479,
+                212.2946703572479
+            ]
+        },
+        {
+            "foto": "foto_live_16-54-20.png",
+            "predict": "foto_predict_16-54-20.png",
+            "distancia-calculada": [
+                0.22238659053492618,
+                222.38659053492617
+            ]
+        },
+        {
+            "foto": "foto_live_16-54-49.png",
+            "predict": "foto_predict_16-54-49.png",
+            "distancia-calculada": [
+                0.2337034862640854,
+                233.7034862640854
+            ]
+        },
+        {
+            "foto": "foto_live_16-55-13.png",
+            "predict": "foto_predict_16-55-13.png",
+            "distancia-calculada": [
+                0.23397942209274256,
+                233.97942209274257
+            ]
+        },
+        {
+            "foto": "foto_live_16-55-19.png",
+            "predict": "foto_predict_16-55-20.png",
+            "distancia-calculada": [
+                0.23379726573897894,
+                233.79726573897895
+            ]
+        },
+        {
+            "foto": "foto_live_16-55-24.png",
+            "predict": "foto_predict_16-55-24.png",
+            "distancia-calculada": [
+                0.23381649092876627,
+                233.81649092876629
+            ]
+        },
+        {
+            "foto": "foto_live_16-55-28.png",
+            "predict": "foto_predict_16-55-28.png",
+            "distancia-calculada": [
+                0.2338944850469735,
+                233.8944850469735
+            ]
+        },
+        {
+            "foto": "foto_live_16-55-48.png",
+            "predict": "foto_predict_16-55-48.png",
+            "distancia-calculada": [
+                0.24521707030705536,
+                245.21707030705537
+            ]
+        },
+        {
+            "foto": "foto_live_16-56-11.png",
+            "predict": "foto_predict_16-56-12.png",
+            "distancia-calculada": [
+                0.2558147671775643,
+                255.8147671775643
+            ]
+        },
+        {
+            "foto": "foto_live_16-56-40.png",
+            "predict": "foto_predict_16-56-40.png",
+            "distancia-calculada": [
+                0.2650560020501785,
+                265.0560020501785
+            ]
+        },
+        {
+            "foto": "foto_live_16-57-10.png",
+            "predict": "foto_predict_16-57-10.png",
+            "distancia-calculada": [
+                0.2744101018408252,
+                274.4101018408252
+            ]
+        },
+        {
+            "foto": "foto_live_16-57-42.png",
+            "predict": "foto_predict_16-57-42.png",
+            "distancia-calculada": [
+                0.28642562280199524,
+                286.42562280199525
+            ]
+        }
+    ]
+}
