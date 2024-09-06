@@ -64,11 +64,12 @@ def distancia_media(img):
         dist_obj = distance_calculation.DistanceCalculation()
         dist_obj.pixel_per_meter = 870
         #centro da imagem
-        centro = numpy.asarray([640, 360, 641, 361])
-        distance = dist_obj.calculate_distance(centroids[0], centro)
+        #centro = numpy.asarray([640, 360, 641, 361])
+        distance = dist_obj.calculate_distance(centroids[0], centroids[1])
 
         result_img = cv2.circle(img, (int(centroids[0][0]), int(centroids[0][1])), radius=10, color=(0, 255, 0), thickness=-1)
-        result_img = cv2.circle(result_img, (640, 360), radius=10, color=(0, 255, 0), thickness=-1)
+        #result_img = cv2.circle(result_img, (640, 360), radius=10, color=(0, 255, 0), thickness=-1)
+        result_img = cv2.circle(img, (int(centroids[1][0]), int(centroids[1][1])), radius=10, color=(0, 255, 0), thickness=-1)
         cv2.imshow("distancia", result_img)
 
         media_distancia += distance[1]
@@ -100,7 +101,11 @@ def distancia(img, logFilename, img_name):
     # 883  (1 m)
     # 870 (10 cm)
     # 8.7
-    dist_obj.pixel_per_meter = 870
+
+    #58 cm de altura (peso embaixo da mesa ao começo da base de ferro)
+    # 500 - 60
+    # 8.3 - 1
+    dist_obj.pixel_per_meter = 830
     distance = dist_obj.calculate_distance(centroids[0], centroids[1])
     print(distance)
     print(centroids[0])
