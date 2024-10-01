@@ -1,25 +1,102 @@
-begin 
+<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="start" access="private" >
+    <Code><![CDATA[begin
+  // start
+  enablePower()
+  delay(0.9)
+  movel(photo,garra,speed)
+  waitEndMove()
 
-//s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-//s.connect((socket.gethostname(), 1234))
-// link? 
+  // worker
+  while true
+    // clear states and get message -> message: GXxxxYyyyDdE
+      // X: x position
+      // Y: y position
+      // D: destination, is an integer value, with index of the points of cradle
+    clearBuffer(input)
+    cont=0
+    sioGet(input,msg)
+    hasmsg=chr(msg[0])=="G"
+    // if has a valid message 
+    if hasmsg
+      //clear worker states
+      axxx=""
+      ayyy=""
+      message=""
+      isy=false
+      isx=false
+      hasmsg=false
+      cont=0
+      while cont<31
+        switch chr(msg[cont+1])
+          case "E"
+            cont=31
+          break
+          case "X"
+            isx=true
+            isy=false
+          break
+          case "Y"
+            isx=false
+            isy=true
+          break
+          default
+            if isx
+              axxx=axxx+chr(msg[cont+1])
+            else
+              ayyy=ayyy+chr(msg[cont+1])
+            endIf
+            message=message+chr(msg[cont+1])
+          break
+        endSwitch
+        cont=cont+1
+      endWhile
 
-sio sSensor1
-sioLink(sSensor1, sio_server)
+      //clear worker states
+      cont=0
+      msg=0
 
-//s.send((bytes("i-------", "utf-8")))
-//s.send((bytes("r-------", "utf-8")))
-string msg
-msg = "i"
+      // move to position
+      toNum(axxx,xxx,convnum)
+      toNum(ayyy,yyy,convnum)
+      //move to home, then to position
+      movej(home,garra,speed)
+      waitEndMove()
+      // [PICK]
+      //move to position of the message
+      movel(appro(home,{yyy,xxx,10,0,0,0}),garra,speed) //todo: cadastrar altura de approuch e pick
+      waitEndMove()
+      //get block : atual -> mover para baixo
+      movel(appro({yyy,xxx,0,0,0,0},{0,0,heigth_pick,0,0,0}),garra,speed) // todo: cadastrar altura de pick
+      waitEndMove()
+      // ACTION: active gripper
+      //atual -> mover para cima
+      movel(appro({yyy,xxx,0,0,0,0}, {0,0,heigth_app,0,0,0}),garra,speed) // move to approuch again, after pick objetc
+      waitEndMove()
 
-sioSet(sSensor1, msg)
+      // [PLACE]
+      //move to destination
+      toNum(message,dest,convnum)
+      movel(appro(home,cradle_appr[dest]),garra,speed)
+      waitEndMove()
+      movel(appro(cradle_appr[dest], {0,0,heigth_pick,0,0,0}),garra,speed) // move to approuch again, after pick objetc
+      waitEndMove()
+      // ACTION: active gripper
+      movel(appro(cradle_appr[dest], {0,0,heigth_app,0,0,0}),garra,speed) // move to approuch again, after pick objetc
+      waitEndMove()
+      //move to home to end
+      movej(home,garra,speed)
+      waitEndMove()
 
-string recebido
-sioGet(sSensor1, recebido)
 
-if recebido == "i"
-    msg = "r"
-    sioSet(sSensor1, msg)
-
-
-end
+      
+    else
+    endIf
+    //
+  endWhile
+  //
+  //
+end]]></Code>
+  </Program>
+</Programs>

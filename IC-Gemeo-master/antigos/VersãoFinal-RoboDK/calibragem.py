@@ -52,7 +52,7 @@ def showImages(images):
 
 def getHSV(metodoContorno, tamanhoMin, tamanhoMax):
 
-    path = 'C:/Code/Projetinhos/IC-Gemeo-master/IC-Gemeo-master/Localizacao de Objetos/Exemplo/WIN_20230306_14_38_54_Pro.jpg'
+    path = '/IC-Gemeo-master/antigos/Localizacao de Objetos/Exemplo/WIN_20230306_14_38_54_Pro.jpg'
     
     
     
