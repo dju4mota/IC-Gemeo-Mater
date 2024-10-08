@@ -27,21 +27,23 @@ def calibra_centro_da_mesa(img):
 
 
 def distancia_media(img):
-    print(f"fCentro encontrado: {centro}")
+    print(f"Centro: {centro}")
     results = model(img)
 
     for result in results:
         # result.show()
         pos = result.boxes.numpy().xyxy
         x, y = calcula_centro_da_peca(pos)
-
         x = x - centro[0]
+        # eixo Y da camera e do robo são invertidos
         y = -y + centro[1]
 
         print(x)
         print(y)
 
-        move_robo(x, y)
+        # move_robo(x, y)
+        global coordenadas
+        coordenadas = [x, y]
 
 
 model = YOLO("../../runs/detect/train20/weights/best.pt")
@@ -51,7 +53,9 @@ cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 
 # atualmente centro está hardcoded e estático, precisamos de uma etapa de calibragem ou manual ou por software
-centro = [640, 360]
+# centro = [640, 360]
+centro = [618, 317]
+coordenadas = [0, 0]
 
 while True:
     ret, frame = cam.read()
@@ -73,7 +77,7 @@ while True:
 
     elif k % 256 == 116:
         # T pressed
-        move_robo(100, 100)
+        move_robo(coordenadas[0], coordenadas[1])
 
     elif k % 256 == 32:
         # SPACE pressed
