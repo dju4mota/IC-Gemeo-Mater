@@ -47,6 +47,12 @@ def distancia_media(img):
         global coordenadas
         coordenadas = [x, y]
 
+def corrige_distorcao(img, matriz_calibracao, coef_distorcao):
+    h, w = img.shape[:2]
+    nova_matriz_calibracao, _ = cv2.getOptimalNewCameraMatrix(matriz_calibracao, coef_distorcao, (w, h), 1, (w, h))
+    img_corrigida = cv2.undistort(img, matriz_calibracao, coef_distorcao, None, nova_matriz_calibracao)
+    return img_corrigida
+
 
 model = YOLO("../../runs/detect/train20/weights/best.pt")
 
