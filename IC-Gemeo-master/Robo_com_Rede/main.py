@@ -20,6 +20,8 @@ def calibra_centro_da_mesa(img):
 
     pos = results[0].boxes.numpy().xyxy
     x, y = calcula_centro_da_peca(pos)
+    result_img = cv2.circle(img, (x, y), radius=10, color=(0, 255, 0), thickness=-1)
+    cv2.imshow("centro calibrado", result_img)
 
     global centro
     centro = [x, y]
@@ -38,8 +40,8 @@ def distancia_media(img):
         # eixo Y da camera e do robo são invertidos
         y = -y + centro[1]
 
-        print(x)
-        print(y)
+        print(f"x: {x}")
+        print(f"y: {y}")
 
         # move_robo(x, y)
         global coordenadas
@@ -52,7 +54,6 @@ cam = cv2.VideoCapture(1, cv2.CAP_DSHOW)
 cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 
-# atualmente centro está hardcoded e estático, precisamos de uma etapa de calibragem ou manual ou por software
 # centro = [640, 360]
 centro = [618, 317]
 coordenadas = [0, 0]
