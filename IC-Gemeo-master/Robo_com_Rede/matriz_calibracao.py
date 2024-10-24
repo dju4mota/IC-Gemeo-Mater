@@ -4,7 +4,7 @@ import numpy as np
 # Definir dimensões do tabuleiro de xadrez (número de quadrados internos)
 num_linhas = 6  # quadrados internos por linha
 num_colunas = 9  # quadrados internos por coluna
-dimensao_quadrado = 25  # tamanho do quadrado do tabuleiro em mm
+dimensao_quadrado = 50  # tamanho do quadrado do tabuleiro em mm
 
 # Preparar os pontos 3D do tabuleiro de xadrez em coordenadas do mundo (eixo Z é 0)
 pontos_objeto = np.zeros((num_linhas * num_colunas, 3), np.float32)
@@ -33,7 +33,7 @@ while True:
     ret, cantos = cv2.findChessboardCorners(gray, (num_colunas, num_linhas), None)
 
     if ret:
-        print("Tabuleiro encontrado!")
+        # print("Tabuleiro encontrado!")
 
         # Ajustar critérios para refinar a detecção dos cantos
         criterios = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.001)
@@ -46,8 +46,8 @@ while True:
         # Desenhar e exibir os cantos encontrados
         frame_cantos = cv2.drawChessboardCorners(frame, (num_colunas, num_linhas), cantos_precisos, ret)
         cv2.imshow("Tabuleiro de Xadrez", frame_cantos)
-    else:
-        print("Tabuleiro não encontrado.")
+    # else:
+        # print("Tabuleiro não encontrado.")
 
     cv2.imshow("Captura", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):

@@ -1,4 +1,6 @@
 import cv2
+import numpy as np
+
 from Sockets.client import Client
 from ultralytics import YOLO
 
@@ -47,10 +49,13 @@ def distancia_media(img):
         global coordenadas
         coordenadas = [x, y]
 
+
 def corrige_distorcao(img, matriz_calibracao, coef_distorcao):
     h, w = img.shape[:2]
     nova_matriz_calibracao, _ = cv2.getOptimalNewCameraMatrix(matriz_calibracao, coef_distorcao, (w, h), 1, (w, h))
     img_corrigida = cv2.undistort(img, matriz_calibracao, coef_distorcao, None, nova_matriz_calibracao)
+    print()
+    cv2.imshow("correcao", img_corrigida)
     return img_corrigida
 
 
@@ -63,6 +68,25 @@ cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 # centro = [640, 360]
 centro = [618, 317]
 coordenadas = [0, 0]
+
+
+matriz = [[2.12774358e+03, 0.00000000e+00, 6.08343881e+02],
+ [0.00000000e+00, 2.11392059e+03, 4.77682892e+02],
+ [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]]
+matriz = np.array(matriz)
+coeficiente = [[-8.92762214e-02,  1.85631508e+01,  2.14318197e-03, -3.09855754e-03,
+  -5.58801665e+02]]
+coeficiente = np.array(coeficiente)
+
+
+
+# matriz = [[2.71097975e+03, 0.00000000e+00, 6.36434420e+02],
+#  [0.00000000e+00, 2.64998157e+03, 6.52368678e+02],
+#  [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]]
+# matriz = np.array(matriz)
+# coeficiente = [[-4.11277456e-01,  4.80050606e-01, -6.24511506e-02,  5.74953461e-03, -5.22772668e+01]]
+# coeficiente = np.array(coeficiente)
+
 
 while True:
     ret, frame = cam.read()
@@ -90,8 +114,11 @@ while True:
         # SPACE pressed
         try:
             distancia_media(frame)
-        except:
+            img = corrige_distorcao(frame,matriz,coeficiente)
+            distancia_media(img)
+        except Exception as e:
             print("erro para calcular distancia")
+            print(e)
 
 
 cam.release()
