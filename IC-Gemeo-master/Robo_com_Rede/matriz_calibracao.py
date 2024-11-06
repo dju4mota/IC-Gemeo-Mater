@@ -35,16 +35,16 @@ while True:
     if ret:
         # print("Tabuleiro encontrado!")
 
-        # Ajustar critérios para refinar a detecção dos cantos
-        criterios = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.001)
-        cantos_precisos = cv2.cornerSubPix(gray, cantos, (11, 11), (-1, -1), criteria=criterios)
+        # # Ajustar critérios para refinar a detecção dos cantos
+        # criterios = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.001)
+        # cantos_precisos = cv2.cornerSubPix(gray, cantos, (11, 11), (-1, -1), criteria=criterios)
 
         # Armazenar pontos para calibração
         pontos_objetos.append(pontos_objeto)
-        pontos_imagem.append(cantos_precisos)
+        pontos_imagem.append(cantos)
 
         # Desenhar e exibir os cantos encontrados
-        frame_cantos = cv2.drawChessboardCorners(frame, (num_colunas, num_linhas), cantos_precisos, ret)
+        frame_cantos = cv2.drawChessboardCorners(frame, (num_colunas, num_linhas), cantos, ret)
         cv2.imshow("Tabuleiro de Xadrez", frame_cantos)
     # else:
         # print("Tabuleiro não encontrado.")
