@@ -1,4 +1,5 @@
 from frame import Frame,IMAGE, MODEL_BLOCKS, MODEL_TABLE
+from datetime import datetime
 
 import cv2
 
@@ -66,7 +67,9 @@ while True:
 
     elif k % 256 == 32:
         # SPACE pressed
-        cv2.imwrite("./images/image.png", frame)
+        nome = datetime.now().strftime("%H%M%S")
+        cv2.imwrite(f"./images/image{nome}.png", frame)
+        cv2.imwrite(f"./images/image.png", frame)
         fazTudo()
 
 cam.release()
